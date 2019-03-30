@@ -1,2 +1,3 @@
-# laptev-roman-otus-js-course
-Homeworks 
+# Homeworks
+### Student: Laptev Roman
+Otus JS course 4th edition
