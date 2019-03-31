@@ -1,8 +1,7 @@
-export const accumulator = (function accumulator(addend) {
+export const accumulator = (function adder(addend) {
   if (addend === undefined) {
     return Number(this)
-  } else {
-    const result = this + addend
-    return accumulator.bind(!isNaN(result) ? result : this)
   }
+  addend = Number(addend)
+  return adder.bind(this + (isNaN(addend) ? 0 : addend))
 }).bind(0)
