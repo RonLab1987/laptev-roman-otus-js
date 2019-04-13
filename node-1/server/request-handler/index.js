@@ -1,9 +1,6 @@
-
 function requestHandler(request, response) {
   response.setHeader('Content-Type', 'application/json')
   response.statusCode = 200
-
-
 
   switch (request.url) {
     case '/':
@@ -17,7 +14,7 @@ function requestHandler(request, response) {
 function responseSample(request, response) {
   setTimeout(() => {
     console.log('send response')
-    response.end(JSON.stringify({message: 'QQ'}))
+    response.end(JSON.stringify({ message: 'QQ' }))
   }, 100)
 }
 

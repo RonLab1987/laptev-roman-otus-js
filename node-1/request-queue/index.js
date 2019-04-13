@@ -10,15 +10,14 @@ const requestOptions = {
   path: '/',
   method: 'GET',
   headers: {
-      'Content-Type': 'application/json'
+    'Content-Type': 'application/json'
   }
 }
 
 const request = http.request(requestOptions, (response) => {
   response.on('data', (chunk) => {
-    console.log(`BODY: ${chunk}`);
-  });
+    console.log(`BODY: ${chunk}`)
+  })
 })
 
 request.end()
-

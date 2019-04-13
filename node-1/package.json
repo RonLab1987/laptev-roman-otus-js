@@ -9,7 +9,9 @@
     "server": "node ./server/index.js"
   },
   "license": "MIT",
-  "devDependencies": {},
+  "devDependencies": {
+    "prettier": "^1.17.0"
+  },
   "dependencies": {
     "dotenv": "^7.0.0"
   }
