@@ -5,8 +5,8 @@
   "main": "index.js",
   "author": "Roman Laptev",
   "scripts": {
-    "dev-server": "NODE_ENV=develop node-dev ./http-server/index.js",
-    "server": "node ./http-server/index.js"
+    "dev-server": "NODE_ENV=develop node-dev ./server/index.js",
+    "server": "node ./server/index.js"
   },
   "license": "MIT",
   "devDependencies": {},
