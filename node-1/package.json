@@ -1,0 +1,17 @@
+{
+  "name": "node-homework-1",
+  "version": "1.0.0",
+  "description": "Create http server and request function",
+  "main": "index.js",
+  "author": "Roman Laptev",
+  "scripts": {
+    "dev-server": "NODE_ENV=develop node-dev ./server/index.js",
+    "server": "node ./server/index.js",
+    "request": "node ./request/index.js"
+  },
+  "private": true,
+  "devDependencies": {
+    "prettier": "^1.17.0"
+  },
+  "dependencies": {}
+}
