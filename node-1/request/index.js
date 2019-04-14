@@ -1,7 +1,4 @@
-const Path = require('path')
-require('dotenv').config({
-  path: Path.join(__dirname, '../.env')
-})
+const env = require('../env.js')
 const RequestQueue = require('./request-queue')
 
 const arg = process.argv.slice(2)
@@ -10,8 +7,8 @@ const mode = ['sync', 'async'].includes(arg[1]) ? arg[1] : 'async'
 
 const requestQueue = new RequestQueue(
   {
-    host: process.env.HTTP_SERVER_HOST,
-    port: process.env.HTTP_SERVER_PORT,
+    host: env.host,
+    port: env.port,
     path: '/'
   },
   requestsCount
