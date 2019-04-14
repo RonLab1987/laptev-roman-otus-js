@@ -1,4 +1,4 @@
-const env = require('../env.js')
+const env = require('../env.json')
 const RequestQueue = require('./request-queue')
 
 const arg = process.argv.slice(2)
@@ -15,7 +15,7 @@ const requestQueue = new RequestQueue(
 )
 
 if (mode === 'async') {
-  requestQueue.runAsyncRequests(requestsCount)
+  requestQueue.runAsyncRequests()
 } else if (mode === 'sync') {
-  requestQueue.runSyncRequests(requestsCount)
+  requestQueue.runSyncRequests()
 }

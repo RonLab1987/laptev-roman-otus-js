@@ -9,7 +9,7 @@
     "server": "node ./server/index.js",
     "request": "node ./request/index.js"
   },
-  "license": "MIT",
+  "private": true,
   "devDependencies": {
     "prettier": "^1.17.0"
   },

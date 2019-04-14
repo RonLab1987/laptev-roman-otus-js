@@ -1,4 +1,4 @@
-const env = require('../env.js')
+const env = require('../env.json')
 const HttpServer = require('./http-server')
 const requestHandler = require('./request-handler')
 

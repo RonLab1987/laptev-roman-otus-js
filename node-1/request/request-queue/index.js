@@ -1,7 +1,7 @@
 const http = require('http')
 
 class RequestQueue {
-  constructor(url = { host: '127.0.0.1', port: 8080, path: '/'}, count = 1) {
+  constructor(url = {}, count = 1) {
     this._options = {
       host: url.host,
       port: url.port,
@@ -18,9 +18,7 @@ class RequestQueue {
     return new Promise((resolve, reject) => {
       const request = http.request(this._options, (incomingMessage) => {
         let data = []
-        incomingMessage.on('data', (chunk) => {
-          data.push(chunk)
-        })
+        incomingMessage.on('data', (chunk) => data.push(chunk))
         incomingMessage.on('end', () => {
           try {
             let response = JSON.parse(Buffer.concat(data).toString())
