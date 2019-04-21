@@ -1,0 +1,16 @@
+{
+  "name": "file-tree",
+  "version": "1.0.0",
+  "description": "Homework for lesson node-4 'event-loop ...'",
+  "main": "index.js",
+  "author": "Roman Laptev",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^24.7.1",
+    "prettier": "^1.17.0"
+  }
+}
