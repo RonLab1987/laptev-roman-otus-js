@@ -1,29 +1,11 @@
-const fs = require('./__mocks__/fs.js')
+
+const FS = require('./__mocks__/fs')
+const data = require('./data')
 const DirectoryTree = require('../../src/directory-tree')
 
+const fs = new FS(data.files)
+
 describe('DirectoryTree module', () => {
-  const MOCK_DIRESTORIES = [
-    {
-      path: 'foo',
-      files: ['f1.txt', 'f2.txt']
-    },
-    {
-      path: 'foo/bar',
-      files: ['bar1.txt', 'bar2.txt']
-    },
-    {
-      path: 'foo/bar/baz',
-      files: []
-    }
-  ]
-
-  const EXPECTED = {
-    files: ['foo/f1.txt', 'foo/f2.txt', 'foo/bar/bar1.txt', 'foo/bar/bar2.txt'],
-    dirs: ['foo', 'foo/bar', 'foo/bar/baz']
-  }
-
-  fs._setMockDirectories(MOCK_DIRESTORIES)
-
   it('should init', () => {
     const directoryTree = new DirectoryTree(fs)
     expect(directoryTree).toBeInstanceOf(DirectoryTree)
@@ -36,10 +18,10 @@ describe('DirectoryTree module', () => {
     ).rejects.toBeInstanceOf(Error)
   })
 
-  it('method getDirContent should resolved with valid value for "foo" path', () => {
-    const directoryTree = new DirectoryTree(fs)
-    return expect(directoryTree.getDirContent('foo')).resolves.toEqual(
-      EXPECTED
-    )
-  })
+  for (let item of data.expected) {
+    it(`method getDirContent should resolved with valid value for "${item.path}" path`, () => {
+      const directoryTree = new DirectoryTree(fs)
+      return expect(directoryTree.getDirContent(item.path)).resolves.toEqual(item.result)
+    })
+  }
 })
