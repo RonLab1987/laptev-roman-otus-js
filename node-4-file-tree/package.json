@@ -7,7 +7,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "tests": "jest"
+    "tests": "jest",
+    "tree": "node ./index.js"
   },
   "devDependencies": {
     "jest": "^24.7.1",

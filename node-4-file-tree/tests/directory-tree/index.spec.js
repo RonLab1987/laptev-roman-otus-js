@@ -1,44 +1,45 @@
-jest.mock('fs')
-
-const fs = require('fs')
+const fs = require('./__mocks__/fs.js')
 const DirectoryTree = require('../../src/directory-tree')
 
 describe('DirectoryTree module', () => {
   const MOCK_DIRESTORIES = [
     {
-      path: './foo',
+      path: 'foo',
       files: ['f1.txt', 'f2.txt']
     },
     {
-      path: './foo/bar',
-      files: ['f1.txt', 'f2.txt']
+      path: 'foo/bar',
+      files: ['bar1.txt', 'bar2.txt']
     },
     {
-      path: './foo/bar/baz',
+      path: 'foo/bar/baz',
       files: []
     }
   ]
 
-  beforeEach(() => {
-    fs._setMockDirectories(MOCK_DIRESTORIES)
-  })
+  const EXPECTED = {
+    files: ['foo/f1.txt', 'foo/f2.txt', 'foo/bar/bar1.txt', 'foo/bar/bar2.txt'],
+    dirs: ['foo', 'foo/bar', 'foo/bar/baz']
+  }
 
-  it('should should init', () => {
-    const directoryTree = new DirectoryTree()
+  fs._setMockDirectories(MOCK_DIRESTORIES)
+
+  it('should init', () => {
+    const directoryTree = new DirectoryTree(fs)
     expect(directoryTree).toBeInstanceOf(DirectoryTree)
   })
 
-  it('method getDirectoryTreeByPath should reject by invalid path "./invalid-path"', () => {
-    const directoryTree = new DirectoryTree()
-    return expect(directoryTree.getDirectoryTreeByPath('./invalid-path'))
-      .rejects
-      .toBeInstanceOf(Error)
+  it('method getDirContent should reject by invalid path "./invalid-path"', () => {
+    const directoryTree = new DirectoryTree(fs)
+    return expect(
+      directoryTree.getDirContent('./invalid-path')
+    ).rejects.toBeInstanceOf(Error)
   })
 
-  it('method getDirectoryTreeByPath should resolve by valid path "./foo"', () => {
-    const directoryTree = new DirectoryTree()
-    return expect(directoryTree.getDirectoryTreeByPath('./foo'))
-      .resolves
-      .toEqual(['f1.txt', 'f2.txt', 'bar'])
+  it('method getDirContent should resolved with valid value for "foo" path', () => {
+    const directoryTree = new DirectoryTree(fs)
+    return expect(directoryTree.getDirContent('foo')).resolves.toEqual(
+      EXPECTED
+    )
   })
 })
