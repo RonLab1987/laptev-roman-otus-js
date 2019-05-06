@@ -6,7 +6,8 @@
   "author": "Roman Laptev",
   "private": true,
   "scripts": {
-    "flow": "node index.js"
+    "flow": "node index.js",
+    "dev": "NODE_ENV=develop node-dev index.js"
   },
   "devDependencies": {
     "prettier": "^1.17.0"
