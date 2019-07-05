@@ -1,18 +1,17 @@
 const { Readable } = require('stream')
 const { getRandomInt } = require('../utils')
 
-function init() {
-  const stream = new Readable({
-    read: (size) => {}
-  })
-  function sendRandomInt() {
-    setTimeout(() => {
-      stream.push(getRandomInt().toString())
-      sendRandomInt()
-    }, 300)
+class NumberGeneratorStream extends Readable {
+  constructor() {
+    super({ objectMode: true })
+    setInterval(() => this._pushNumber(), 400)
   }
-  sendRandomInt()
-  return stream
+
+  _read(size) {}
+
+  _pushNumber() {
+    this.push(getRandomInt())
+  }
 }
 
-module.exports = init
+module.exports = NumberGeneratorStream
