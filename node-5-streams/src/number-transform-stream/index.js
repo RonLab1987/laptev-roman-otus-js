@@ -6,11 +6,11 @@ class NumberTransformStream extends Transform {
     super({ objectMode: true })
   }
 
-  write (number) {
-    if (typeof number !== 'number') {
+  _transform (chunk, encoding, callback) {
+    if (typeof chunk !== 'number') {
       this.destroy(new Error('numberTransformStream input must be Number'))
     }
-    this.push(number + getRandomInt())
+    callback(null, chunk + getRandomInt())
   }
 }
 

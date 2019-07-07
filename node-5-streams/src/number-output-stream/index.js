@@ -5,11 +5,11 @@ class NumberOutputStream extends Writable {
     super({ objectMode: true })
   }
 
-  write (number) {
-    if (typeof number !== 'number') {
+  write (chunk) {
+    if (typeof chunk !== 'number') {
       this.destroy(new Error('numberOutputStream input must be Number'))
     }
-    console.log(number)
+    console.log(chunk)
   }
 }
 

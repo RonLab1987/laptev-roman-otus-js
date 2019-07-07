@@ -1,4 +1,5 @@
 const { pipeline } = require('stream')
+
 const NumberGeneratorStream = require('./src/number-generator-stream')
 const NumberTransformStream = require('./src/number-transform-stream')
 const NumberOutputStream = require('./src/number-output-stream')
