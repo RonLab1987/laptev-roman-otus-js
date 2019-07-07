@@ -9,9 +9,5 @@ const path = arg[0] ? arg[0] : '.'
 const directoryTree = new DirectoryTree(fs)
 
 directoryTree.getDirContent(path)
-  .then((response) => {
-    console.dir(response)
-  })
-  .catch((error) => {
-    console.error(error)
-  })
+  .then((response) => { console.dir(response) })
+  .catch((error) => { console.error(error) })
