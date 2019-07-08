@@ -5,8 +5,12 @@
   "main": "index.js",
   "author": "Roman Laptev",
   "private": true,
+  "engines": {
+    "node": ">=10.0.0"
+  },
   "scripts": {
-    "flow": "node index.js"
+    "flow": "node index.js",
+    "dev": "NODE_ENV=develop node-dev index.js"
   },
   "devDependencies": {
     "prettier": "^1.17.0"
