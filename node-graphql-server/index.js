@@ -1,20 +1,5 @@
-const express = require('express');
-const graphqlHTTP = require('express-graphql');
-const { buildSchema } = require('graphql');
+const storage = require('./src/storage')
+const graphQLApiServer = require('./src/graphql-api-server')
+const { storageGraphQLSchema } = require('./src/graphql')
 
-var schema = buildSchema(`
-  type Query {
-    hello: String
-  }
-`);
-
-var root = { hello: () => 'Hello world!' };
-
-const app = express();
-
-app.use('/graphql', graphqlHTTP({
-  schema: schema,
-  rootValue: root,
-  graphiql: true,
-}));
-app.listen(4000, () => console.log('Now browse to localhost:4000/graphql'));
+graphQLApiServer(storageGraphQLSchema(storage))

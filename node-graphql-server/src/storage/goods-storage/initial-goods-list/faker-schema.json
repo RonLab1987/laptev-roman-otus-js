@@ -1,0 +1,75 @@
+{
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/good"
+  },
+  "minItems": 100,
+  "maxItems": 150,
+  "definitions": {
+    "good": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "faker": "random.uuid"
+        },
+        "name": {
+          "type": "string",
+          "faker": "commerce.productName"
+        },
+        "description": {
+          "type": "string",
+          "faker": "lorem.paragraphs"
+        },
+        "shortDescription": {
+          "type": "string",
+          "faker": "lorem.paragraph"
+        },
+        "color": {
+          "type": "string",
+          "faker": "commerce.color"
+        },
+        "image": {
+          "type": "string",
+          "faker": "image.cats"
+        },
+        "price": {
+          "type": "object",
+          "properties": {
+            "currency": {
+              "type": "String",
+              "enum": ["USD"]
+            },
+            "consumer": {
+              "type": "number",
+              "faker": "commerce.price"
+            },
+            "wholesale": {
+              "type": "number",
+              "faker": "commerce.price"
+            }
+          },
+          "required": ["currency", "consumer", "wholesale"]
+        },
+        "stockBalance": {
+          "type": "integer"
+        },
+        "companyId": {
+          "type": "integer",
+          "enum": [1, 2, 3, 4, 5]
+        }
+      },
+      "required": [
+        "uuid",
+        "name",
+        "description",
+        "short_description",
+        "color",
+        "image",
+        "price",
+        "stock_balance",
+        "company_id"
+      ]
+    }
+  }
+}
