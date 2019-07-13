@@ -1,36 +1,74 @@
-const { GraphQLObjectType, GraphQLInt, GraphQLNonNull } = require('graphql');
+const graphql = require('graphql');
 
-const { ProductsList } = require('../../../../types')
+const types = require('../../../../types')
 const { query } = require('../../../interface')
 
+const initHandlers = require('./handlers')
+
 function StorageQuery(storage) {
-  return new GraphQLObjectType({
+  const handlers = initHandlers(storage)
+
+  return new graphql.GraphQLObjectType({
     name: 'StorageQuery',
     interfaces: [query],
     fields: {
-      productsList: {
-        type: ProductsList,
+      productList: {
+        type: types.ProductList,
         args: {
-          companyId: {
-            type: GraphQLNonNull(GraphQLInt)
+          manufacturerId: {
+            type: graphql.GraphQLInt
+          },
+          categoryId: {
+            type: graphql.GraphQLInt
           }
         },
         resolve(_, args) {
-          return new Promise(async (resolve, reject) => {
-            try {
-              let productList = await storage.product.list(args)
-              productList = productList.map(async (item) => {
-                const manufacturer = await storage.manufacturer.getById(item.manufacturerId)
-                return {
-                  ...item,
-                  manufacturer
-                }
-              })
-              resolve(productList)
-            } catch (error) {
-              reject(error)
-            }
-          })
+          return handlers.productList(args)
+        }
+      },
+      product: {
+        type: types.Product,
+        args: {
+          id: {
+            type: graphql.GraphQLNonNull(graphql.GraphQLInt)
+          }
+        },
+        resolve(_, args) {
+          return handlers.product(args)
+        }
+      },
+      productManufacturerList: {
+        type: types.ProductManufacturerList,
+        resolve(_, args) {
+          return handlers.productManufacturerList(args)
+        }
+      },
+      productManufacturer: {
+        type: types.ProductManufacturer,
+        args: {
+          id: {
+            type: graphql.GraphQLNonNull(graphql.GraphQLInt)
+          }
+        },
+        resolve(_, args) {
+          return handlers.productManufacturer(args)
+        }
+      },
+      productCategoryList: {
+        type: types.ProductCategoryList,
+        resolve(_, args) {
+          return handlers.productCategoryList(args)
+        }
+      },
+      productCategory: {
+        type: types.ProductCategory,
+        args: {
+          id: {
+            type: graphql.GraphQLNonNull(graphql.GraphQLInt)
+          }
+        },
+        resolve(_, args) {
+          return handlers.productCategory(args)
         }
       }
     }

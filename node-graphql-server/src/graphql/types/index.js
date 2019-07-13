@@ -26,10 +26,10 @@ const ProductManufacturer = new GraphQLObjectType({
   name: 'ProductManufacturer',
   fields: () => ({
     id: {
-      type: GraphQLInt
+      type: GraphQLNonNull(GraphQLInt)
     },
     name: {
-      type: GraphQLString
+      type: GraphQLNonNull(GraphQLString)
     },
     country: {
       type: GraphQLString
@@ -37,11 +37,27 @@ const ProductManufacturer = new GraphQLObjectType({
   })
 })
 
+const ProductManufacturerList = new GraphQLList(ProductManufacturer)
+
+const ProductCategory = new GraphQLObjectType({
+  name: 'ProductCategory',
+  fields: () => ({
+    id: {
+      type: GraphQLNonNull(GraphQLInt)
+    },
+    name: {
+      type: GraphQLNonNull(GraphQLString)
+    }
+  })
+})
+
+const ProductCategoryList = new GraphQLList(ProductCategory)
+
 const Product = new GraphQLObjectType({
   name: 'Product',
   fields: () => ({
-    uuid: {
-      type: GraphQLNonNull(GraphQLString)
+    id: {
+      type: GraphQLNonNull(GraphQLInt)
     },
     name: {
       type: GraphQLString
@@ -66,16 +82,21 @@ const Product = new GraphQLObjectType({
     },
     manufacturer: {
       type: GraphQLNonNull(ProductManufacturer)
+    },
+    category: {
+      type: GraphQLNonNull(ProductCategory)
     }
   })
 })
 
-
-const ProductsList = new GraphQLList(Product)
+const ProductList = new GraphQLList(Product)
 
 module.exports = {
-  Product,
   ProductPrice,
   ProductManufacturer,
-  ProductsList
+  ProductManufacturerList,
+  ProductCategory,
+  ProductCategoryList,
+  Product,
+  ProductList
 }

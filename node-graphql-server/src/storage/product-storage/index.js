@@ -8,11 +8,35 @@ class ProductStorage {
     this.__productList = cloneDeep(productList)
   }
 
-  list(args) {
-    console.log('args: ', args)
-    return Promise.resolve(
-      this.__productList
-    )
+  list({ manufacturerId, categoryId }) {
+    const list = this.__productList.filter((item) => {
+      if (
+        manufacturerId !== undefined &&
+        item.manufacturerId !== manufacturerId
+      ) {
+        return false
+      }
+      if (
+        categoryId !== undefined &&
+        item.categoryId !== categoryId
+      ) {
+        return false
+      }
+      return true
+    })
+    return Promise.resolve(list)
+  }
+
+  getById(id) {
+    return new Promise((resolve, reject) => {
+      const product = this.__productList.find(
+        (item) => item.id === id
+      )
+      if (product === undefined) {
+        return reject(new Error(`Can not find product with id ${id}`))
+      }
+      return resolve(product)
+    })
   }
 }
 

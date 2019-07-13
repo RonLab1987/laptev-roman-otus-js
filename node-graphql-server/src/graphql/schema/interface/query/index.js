@@ -1,15 +1,48 @@
-const { GraphQLInterfaceType, GraphQLNonNull, GraphQLInt } = require('graphql');
+const graphql = require('graphql');
 
-const { ProductsList } = require('../../../types')
+const types = require('../../../types')
 
-const query = new GraphQLInterfaceType({
+const query = new graphql.GraphQLInterfaceType({
   name: 'Query',
   fields: {
-    productsList: {
-      type: ProductsList,
+    productList: {
+      type: types.ProductList,
       args: {
-        companyId: {
-          type: GraphQLNonNull(GraphQLInt)
+        manufacturerId: {
+          type: graphql.GraphQLInt
+        },
+        categoryId: {
+          type: graphql.GraphQLInt
+        }
+      }
+    },
+    product: {
+      type: types.Product,
+      args: {
+        id: {
+          type: graphql.GraphQLNonNull(graphql.GraphQLInt)
+        }
+      }
+    },
+    productManufacturerList: {
+      type: types.ProductManufacturerList
+    },
+    productManufacturer: {
+      type: types.ProductManufacturer,
+      args: {
+        id: {
+          type: graphql.GraphQLNonNull(graphql.GraphQLInt)
+        }
+      }
+    },
+    productCategoryList: {
+      type: types.ProductCategoryList
+    },
+    productCategory: {
+      type: types.ProductCategory,
+      args: {
+        id: {
+          type: graphql.GraphQLNonNull(graphql.GraphQLInt)
         }
       }
     }

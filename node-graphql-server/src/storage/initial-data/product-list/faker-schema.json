@@ -9,9 +9,8 @@
     "good": {
       "type": "object",
       "properties": {
-        "uuid": {
-          "type": "string",
-          "faker": "random.uuid"
+        "id": {
+          "type": "number"
         },
         "name": {
           "type": "string",
@@ -59,10 +58,14 @@
         "manufacturerId": {
           "type": "integer",
           "enum": [1, 2, 3, 4, 5]
+        },
+        "categoryId": {
+          "type": "integer",
+          "enum": [1, 2, 3, 4, 5]
         }
       },
       "required": [
-        "uuid",
+        "id",
         "name",
         "description",
         "shortDescription",
@@ -70,7 +73,8 @@
         "image",
         "price",
         "stockBalance",
-        "manufacturerId"
+        "manufacturerId",
+        "categoryId"
       ]
     }
   }

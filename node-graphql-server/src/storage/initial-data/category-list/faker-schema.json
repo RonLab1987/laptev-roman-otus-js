@@ -15,15 +15,11 @@
         "name": {
           "type": "string",
           "faker": "company.companyName"
-        },
-        "country": {
-          "type": "string"
         }
       },
       "required": [
         "id",
-        "name",
-        "country"
+        "name"
       ]
     }
   }
