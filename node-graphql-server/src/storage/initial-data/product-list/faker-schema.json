@@ -52,9 +52,11 @@
           "required": ["currency", "consumer", "wholesale"]
         },
         "stockBalance": {
-          "type": "integer"
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100000
         },
-        "companyId": {
+        "manufacturerId": {
           "type": "integer",
           "enum": [1, 2, 3, 4, 5]
         }
@@ -63,12 +65,12 @@
         "uuid",
         "name",
         "description",
-        "short_description",
+        "shortDescription",
         "color",
         "image",
         "price",
-        "stock_balance",
-        "company_id"
+        "stockBalance",
+        "manufacturerId"
       ]
     }
   }

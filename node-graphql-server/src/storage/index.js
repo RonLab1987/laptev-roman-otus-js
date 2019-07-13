@@ -1,5 +1,8 @@
-const goodsStorage = require('./goods-storage')
+const initialData = require('./initial-data')
+const ProductStorage = require('./product-storage')
+const ManufacturerStorage = require('./manufacturer-storage')
 
 module.exports = {
-  goods: goodsStorage
+  product: new ProductStorage(initialData.productList),
+  manufacturer: new ManufacturerStorage(initialData.manufacturerList)
 }

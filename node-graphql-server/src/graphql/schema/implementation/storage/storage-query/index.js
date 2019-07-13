@@ -1,17 +1,36 @@
-const { GraphQLObjectType } = require('graphql');
+const { GraphQLObjectType, GraphQLInt, GraphQLNonNull } = require('graphql');
 
-const { GoodsList } = require('../../../../types')
+const { ProductsList } = require('../../../../types')
 const { query } = require('../../../interface')
 
 function StorageQuery(storage) {
   return new GraphQLObjectType({
-    name: 'QueryStorage',
+    name: 'StorageQuery',
     interfaces: [query],
     fields: {
-      goodsList: {
-        type: GoodsList,
-        resolve() {
-          return storage.goods.list()
+      productsList: {
+        type: ProductsList,
+        args: {
+          companyId: {
+            type: GraphQLNonNull(GraphQLInt)
+          }
+        },
+        resolve(_, args) {
+          return new Promise(async (resolve, reject) => {
+            try {
+              let productList = await storage.product.list(args)
+              productList = productList.map(async (item) => {
+                const manufacturer = await storage.manufacturer.getById(item.manufacturerId)
+                return {
+                  ...item,
+                  manufacturer
+                }
+              })
+              resolve(productList)
+            } catch (error) {
+              reject(error)
+            }
+          })
         }
       }
     }

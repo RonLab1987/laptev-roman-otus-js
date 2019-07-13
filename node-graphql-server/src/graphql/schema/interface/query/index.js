@@ -1,12 +1,17 @@
-const { GraphQLInterfaceType } = require('graphql');
+const { GraphQLInterfaceType, GraphQLNonNull, GraphQLInt } = require('graphql');
 
-const { GoodsList } = require('../../../types')
+const { ProductsList } = require('../../../types')
 
 const query = new GraphQLInterfaceType({
   name: 'Query',
   fields: {
-    goodsList: {
-      type: GoodsList
+    productsList: {
+      type: ProductsList,
+      args: {
+        companyId: {
+          type: GraphQLNonNull(GraphQLInt)
+        }
+      }
     }
   }
 })

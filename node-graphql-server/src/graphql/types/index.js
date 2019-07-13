@@ -3,11 +3,12 @@ const {
   GraphQLList,
   GraphQLString,
   GraphQLInt,
-  GraphQLFloat
+  GraphQLFloat,
+  GraphQLNonNull
 } = require('graphql');
 
-const GoodPrice = new GraphQLObjectType({
-  name: 'GoodPrice',
+const ProductPrice = new GraphQLObjectType({
+  name: 'ProductPrice',
   fields: () => ({
     currency: {
       type: GraphQLString
@@ -21,11 +22,26 @@ const GoodPrice = new GraphQLObjectType({
   })
 })
 
-const Good = new GraphQLObjectType({
-  name: 'Good',
+const ProductManufacturer = new GraphQLObjectType({
+  name: 'ProductManufacturer',
+  fields: () => ({
+    id: {
+      type: GraphQLInt
+    },
+    name: {
+      type: GraphQLString
+    },
+    country: {
+      type: GraphQLString
+    },
+  })
+})
+
+const Product = new GraphQLObjectType({
+  name: 'Product',
   fields: () => ({
     uuid: {
-      type: GraphQLString
+      type: GraphQLNonNull(GraphQLString)
     },
     name: {
       type: GraphQLString
@@ -43,22 +59,23 @@ const Good = new GraphQLObjectType({
       type: GraphQLString
     },
     price: {
-      type: GoodPrice
+      type: GraphQLNonNull(ProductPrice)
     },
     stockBalance: {
-      type: GraphQLInt
+      type: GraphQLNonNull(GraphQLInt)
     },
-    companyId: {
-      type: GraphQLInt
+    manufacturer: {
+      type: GraphQLNonNull(ProductManufacturer)
     }
   })
 })
 
 
-const GoodsList = new GraphQLList(Good)
+const ProductsList = new GraphQLList(Product)
 
 module.exports = {
-  Good,
-  GoodPrice,
-  GoodsList
+  Product,
+  ProductPrice,
+  ProductManufacturer,
+  ProductsList
 }
