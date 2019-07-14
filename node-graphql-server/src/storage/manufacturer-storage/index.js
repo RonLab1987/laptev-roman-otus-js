@@ -1,11 +1,10 @@
-const { cloneDeep } = require('lodash')
 
 class ManufacturerStorage {
   constructor(manufacturerList = []) {
     if (!Array.isArray(manufacturerList)) {
       throw new Error('manufacturerList must be Array')
     }
-    this.__manufacturerList = cloneDeep(manufacturerList)
+    this.__manufacturerList = manufacturerList
   }
 
   list() {
