@@ -38,6 +38,19 @@ class ProductStorage {
       return resolve(product)
     })
   }
+
+  patchProductInfo(id, patch = {}) {
+    return new Promise((resolve, reject) => {
+      this.getById(id)
+        .then((product) => {
+          for (let key in patch) {
+            product[key] = patch[key]
+          }
+          resolve(product)
+        })
+        .catch((error) => reject(error))
+    })
+  }
 }
 
 module.exports = ProductStorage

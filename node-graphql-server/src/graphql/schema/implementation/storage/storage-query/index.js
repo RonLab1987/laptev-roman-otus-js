@@ -3,7 +3,7 @@ const graphql = require('graphql');
 const types = require('../../../../types')
 const { query } = require('../../../interface')
 
-const initHandlers = require('./handlers')
+const initHandlers = require('../handlers')
 
 function StorageQuery(storage) {
   const handlers = initHandlers(storage)

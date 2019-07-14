@@ -4,7 +4,8 @@ const {
   GraphQLString,
   GraphQLInt,
   GraphQLFloat,
-  GraphQLNonNull
+  GraphQLNonNull,
+  GraphQLInputObjectType
 } = require('graphql');
 
 const ProductPrice = new GraphQLObjectType({
@@ -91,6 +92,33 @@ const Product = new GraphQLObjectType({
 
 const ProductList = new GraphQLList(Product)
 
+const ProductInfoPatch = new GraphQLInputObjectType({
+  name: 'ProductInfoPatch',
+  fields: () => ({
+    name: {
+      type: GraphQLString
+    },
+    description: {
+      type: GraphQLString
+    },
+    shortDescription: {
+      type: GraphQLString
+    },
+    color: {
+      type: GraphQLString
+    },
+    image: {
+      type: GraphQLString
+    },
+    manufacturerId: {
+      type: GraphQLInt
+    },
+    categoryId: {
+      type: GraphQLInt
+    }
+  })
+})
+
 module.exports = {
   ProductPrice,
   ProductManufacturer,
@@ -98,5 +126,6 @@ module.exports = {
   ProductCategory,
   ProductCategoryList,
   Product,
-  ProductList
+  ProductList,
+  ProductInfoPatch
 }

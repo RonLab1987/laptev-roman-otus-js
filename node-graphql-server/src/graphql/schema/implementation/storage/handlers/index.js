@@ -22,8 +22,14 @@ function initHandlers (storage) {
       const productItem = await storage.product.getById(id)
       return await this.__computeProductType(productItem)
     },
+    async patchProductInfo({ id, patch }) {
+      const productItem = await storage.product.patchProductInfo(
+        id,
+        patch
+      )
+      return await this.__computeProductType(productItem)
+    },
     async __computeProductType(product) {
-      console.log(product)
       const manufacturer = await storage.manufacturer.getById(product.manufacturerId)
       const category = await storage.category.getById(product.categoryId)
       return {

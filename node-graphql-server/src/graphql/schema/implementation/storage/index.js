@@ -1,6 +1,7 @@
 const { GraphQLSchema } = require('graphql');
 
 const StorageQuery = require('./storage-query')
+const StorageMutation = require('./storage-mutation')
 
 function storageGraphQLSchema(storage) {
   if (!storage) {
@@ -8,7 +9,8 @@ function storageGraphQLSchema(storage) {
   }
 
   return new GraphQLSchema({
-    query: StorageQuery(storage)
+    query: StorageQuery(storage),
+    mutation: StorageMutation(storage)
   })
 }
 
