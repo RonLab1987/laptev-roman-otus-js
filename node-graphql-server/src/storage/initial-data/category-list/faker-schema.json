@@ -1,0 +1,26 @@
+{
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/manufacturer"
+  },
+  "minItems": 5,
+  "maxItems": 5,
+  "definitions": {
+    "manufacturer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string",
+          "faker": "company.companyName"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    }
+  }
+}
